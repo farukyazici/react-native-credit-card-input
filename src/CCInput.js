@@ -62,7 +62,6 @@ export default class CCInput extends Component {
       inputStyle, labelStyle,
       validColor, invalidColor, placeholderColor, inputComponent } = this.props;
     const TextInputComponent = inputComponent || TextInput;
-    console.log('inputComponent', inputComponent);
     return (
       <TouchableOpacity onPress={this.focus}
         activeOpacity={0.99}>
