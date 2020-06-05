@@ -15,6 +15,7 @@ import { InjectedProps } from "./connectToState";
 const s = StyleSheet.create({
   container: {
     alignItems: "center",
+    paddingBottom: 16,
   },
   form: {
     width: '100%',
@@ -27,7 +28,7 @@ const s = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  row: { flexDirection: 'row' },
+  row: { flexDirection: 'row', marginTop: 12 },
   flex: { flex: 1 },
 });
 
@@ -87,8 +88,9 @@ export default class CreditCardInput extends Component {
       <ScrollView ref="Form"
         horizontal={false}
         keyboardShouldPersistTaps="handled"
-        scrollEnabled={false}
+        scrollEnabled={true}
         showsHorizontalScrollIndicator={false}
+        bounces={false}
         contentContainerStyle={s.container}
         style={s.form}>
         <CreditCard focused={focused}
@@ -105,7 +107,7 @@ export default class CreditCardInput extends Component {
           {requiresName &&
             <CCInput {...this._inputProps("name")}
               keyboardType="default" />}
-          <CCInput {...this._inputProps("number")} />
+          <CCInput {...this._inputProps("number")} containerStyle={{marginTop: 12}} />
         </View>
         <View style={s.row}>
           <View style={s.flex}>
