@@ -17,16 +17,15 @@ const s = StyleSheet.create({
     alignItems: "center",
   },
   form: {
-    marginTop: 20,
+    width: '100%',
+  },
+  inputsContainer: {
+    marginTop: 16,
     width: '100%',
   },
   inputLabel: {
     fontSize: 18,
     fontWeight: "bold",
-  },
-  input: {
-    paddingLeft: 10,
-    paddingRight: 10,
   },
   row: { flexDirection: 'row' },
   flex: { flex: 1 },
@@ -61,7 +60,7 @@ export default class CreditCardInput extends Component {
     } = this.props;
 
     return {
-      inputStyle: [s.input, inputStyle],
+      inputStyle,
       labelStyle: [s.inputLabel, labelStyle],
       validColor, invalidColor, placeholderColor,
       ref: field, field,
@@ -85,7 +84,13 @@ export default class CreditCardInput extends Component {
     } = this.props;
 
     return (
-      <View style={s.container}>
+      <ScrollView ref="Form"
+        horizontal={false}
+        keyboardShouldPersistTaps="handled"
+        scrollEnabled={false}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={s.container}
+        style={s.form}>
         <CreditCard focused={focused}
           brand={type}
           scale={cardScale}
@@ -96,35 +101,29 @@ export default class CreditCardInput extends Component {
           number={number}
           expiry={expiry}
           cvc={cvc} />
-        <ScrollView ref="Form"
-          horizontal={false}
-          keyboardShouldPersistTaps="always"
-          scrollEnabled={false}
-          showsHorizontalScrollIndicator={false}
-          style={s.form}>
+        <View style={s.inputsContainer}>
           {requiresName &&
             <CCInput {...this._inputProps("name")}
               keyboardType="default" />}
           <CCInput {...this._inputProps("number")} />
-          <View style={s.row}>
-            <View style={s.flex}>
-              <CCInput {...this._inputProps("expiry")} />
-            </View>
-            {requiresCVC &&
-              <View style={s.flex}>
-                <CCInput {...this._inputProps("cvc")} />
-              </View>}
+        </View>
+        <View style={s.row}>
+          <View style={s.flex}>
+            <CCInput {...this._inputProps("expiry")} />
           </View>
-          {requiresPostalCode &&
-            <CCInput {...this._inputProps("postalCode")} />}
-        </ScrollView>
-      </View>
+          {requiresCVC &&
+            <View style={s.flex}>
+              <CCInput {...this._inputProps("cvc")} />
+            </View>}
+        </View>
+        {requiresPostalCode &&
+          <CCInput {...this._inputProps("postalCode")} />}
+      </ScrollView>
     );
   }
 }
 
 CreditCardInput.defaultProps = {
-  cardViewSize: {},
   labels: {
     name: "Cardholder's name",
     number: "Card Number",
