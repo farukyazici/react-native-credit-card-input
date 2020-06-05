@@ -59,11 +59,11 @@ export default class CCInput extends Component {
 
   render() {
     const { label, value, placeholder, status, keyboardType,
-      inputStyle, labelStyle,
+      inputStyle, labelStyle, containerStyle,
       validColor, invalidColor, placeholderColor, inputComponent } = this.props;
     const TextInputComponent = inputComponent || TextInput;
     return (
-      <View style={{flexDirection: 'column', width: '100%'}}>
+      <View style={[{flexDirection: 'column', width: '100%'}, containerStyle]}>
         {!!label && <Text style={[labelStyle, {textAlign: "left", width: "100%"}]}>{label}</Text>}
         <TextInputComponent ref="input"
           keyboardType={keyboardType}
