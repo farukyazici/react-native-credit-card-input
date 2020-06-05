@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import {
   Text,
   TextInput,
-  TouchableOpacity,
+  View,
   StyleSheet,
   ViewPropTypes
 } from "react-native";
@@ -63,9 +63,8 @@ export default class CCInput extends Component {
       validColor, invalidColor, placeholderColor, inputComponent } = this.props;
     const TextInputComponent = inputComponent || TextInput;
     return (
-      <TouchableOpacity onPress={this.focus}
-        activeOpacity={0.99}>
-        {!!label && <Text style={[labelStyle]}>{label}</Text>}
+      <View style={{flexDirection: 'column', width: '100%'}}>
+        {!!label && <Text style={[labelStyle, {textAlign: "left", width: "100%"}]}>{label}</Text>}
         <TextInputComponent ref="input"
           keyboardType={keyboardType}
           autoCapitalise="words"
@@ -83,7 +82,7 @@ export default class CCInput extends Component {
           value={value}
           onFocus={this._onFocus}
           onChangeText={this._onChange} />
-      </TouchableOpacity>
+      </View>
     );
   }
 }
