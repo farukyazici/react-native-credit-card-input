@@ -52,9 +52,7 @@ export default function connectToState(CreditCardInput) {
       };
     }
 
-    componentDidMount = () => setTimeout(() => { // Hacks because componentDidMount happens before component is rendered
-      this.props.autoFocus && this.focus("number");
-    });
+    clear = () => void this.setState({values:{}});
 
     setValues = values => {
       const newValues = { ...this.state.values, ...values };
